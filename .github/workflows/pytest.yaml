@@ -13,7 +13,7 @@ env:
   SECRET_KEY: "CLKGhZSjp2HPze96jdNofBD3SE8z62d2N6abTqLmzGh947jX283cr4jCBmUr2yXXrxu2bXfWTDY83AfFXotBjzVbUExxqkqvkVibZK6vs2pL5VMKCbM77cZajMhqLJUV"
 
 jobs:
-  build:
+  pytest:
 
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -55,11 +55,7 @@ jobs:
       - name: Install project
         run: poetry install --no-interaction
       #----------------------------------------------
-      #       run pytest  
+      #       run pytest and coverage  
       #----------------------------------------------
       - name: Run pytest
-        run: poetry run pytest
-      # - name: Test with pytest
-      #   run: |
-      #     cd prices_api
-      #     poetry run python -m pytest
+        run: poetry run coverage run -m pytest .
