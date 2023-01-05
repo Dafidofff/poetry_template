@@ -1,0 +1,65 @@
+name: Python package
+
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  HOST: "213.124.222.158"
+  SECRET_KEY: "CLKGhZSjp2HPze96jdNofBD3SE8z62d2N6abTqLmzGh947jX283cr4jCBmUr2yXXrxu2bXfWTDY83AfFXotBjzVbUExxqkqvkVibZK6vs2pL5VMKCbM77cZajMhqLJUV"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      #----------------------------------------------
+      #       check-out repo and set-up python
+      #----------------------------------------------
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Set up python
+        id: setup-python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          
+      - name: add IBapi directory
+        run: |
+          cd ..
+          wget https://interactivebrokers.github.io/downloads/twsapi_macunix.1020.01.zip
+          unzip -o twsapi_macunix.1020.01.zip
+          ls
+          cd AITR
+      #----------------------------------------------
+      #  -----  install & configure poetry  -----
+      #----------------------------------------------
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: true
+
+      #----------------------------------------------
+      #       load cached venv if cache exists
+      #----------------------------------------------
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+      #----------------------------------------------
+      # install dependencies if cache does not exist
+      #----------------------------------------------
+      - name: Install dependencies
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: poetry install --no-interaction --no-root
+      - name: Install project
+        run: poetry install --no-interaction
