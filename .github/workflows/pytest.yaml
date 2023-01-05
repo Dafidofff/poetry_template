@@ -29,13 +29,6 @@ jobs:
         with:
           python-version: '3.10'
           
-      - name: add IBapi directory
-        run: |
-          cd ..
-          wget https://interactivebrokers.github.io/downloads/twsapi_macunix.1020.01.zip
-          unzip -o twsapi_macunix.1020.01.zip
-          ls
-          cd AITR
       #----------------------------------------------
       #  -----  install & configure poetry  -----
       #----------------------------------------------
