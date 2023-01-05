@@ -65,3 +65,13 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
+
+       - name: Run the Action
+      uses: devops-infra/action-commit-push@master
+      with:
+        github_token: "${{ secrets.GITHUB_TOKEN }}"
+        add_timestamp: true
+        commit_prefix: "[AUTO]"
+        commit_message: "Automatic commit"
+        force: false
+        target_branch: update/version
