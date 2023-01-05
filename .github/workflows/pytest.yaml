@@ -8,10 +8,6 @@ on:
     branches:
       - main
 
-env:
-  HOST: "213.124.222.158"
-  SECRET_KEY: "CLKGhZSjp2HPze96jdNofBD3SE8z62d2N6abTqLmzGh947jX283cr4jCBmUr2yXXrxu2bXfWTDY83AfFXotBjzVbUExxqkqvkVibZK6vs2pL5VMKCbM77cZajMhqLJUV"
-
 jobs:
   pytest:
 
@@ -66,11 +62,12 @@ jobs:
         run: |
           ls ${{ github.workspace }}
 
-       - name: Run the Action
-      uses: devops-infra/action-commit-push@master
-      with:
-        github_token: "${{ secrets.GITHUB_TOKEN }}"
-        add_timestamp: true
-        commit_prefix: "[AUTO]"
-        commit_message: "Automatic commit"
-        force: false
+      - name: Run the Action
+        uses: devops-infra/action-commit-push@master
+        with:
+          github_token: "${{ secrets.GITHUB_TOKEN }}"
+          add_timestamp: true
+          commit_prefix: "[AUTO]"
+          commit_message: "Automatic commit"
+          force: false
+          target_branch: update/version
