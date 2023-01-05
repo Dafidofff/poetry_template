@@ -59,3 +59,5 @@ jobs:
       #----------------------------------------------
       - name: Run pytest
         run: poetry run coverage run -m pytest .
+      - name: Create coverage .svg
+        run: poetry run coverage-badge -o coverage.svg #-f
