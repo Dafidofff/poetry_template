@@ -58,6 +58,4 @@ jobs:
       - name: Create coverage .json
         run: poetry run coverage json 
       - name: Get coverage summary percentage
-        run: export TOTAL=$(python -c "import json;print(json.load(open('coverage.json'))['files']['template/__init__.py']['summary']['percent_covered'])")
-             echo "total=$TOTAL" >> $GITHUB_ENV
-             echo "### Total coverage; ${TOTAL}%"
+        run: TOTAL=$(python -c "import json;print(json.load(open('coverage.json'))['files']['template/__init__.py']['summary']['percent_covered'])") && echo "total=$TOTAL" >> $GITHUB_ENV && echo "### Total coverage; ${TOTAL}%" 
