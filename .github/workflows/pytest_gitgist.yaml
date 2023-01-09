@@ -59,6 +59,21 @@ jobs:
         run: poetry run coverage json 
       - name: Get coverage summary percentage
         run: |
-          TOTAL=$(python -c "import json;print(json.load(open('coverage.json'))['files']['template/__init__.py']['summary']['percent_covered'])") 
+          TOTAL=$(python -c "import json;print(json.load(open('coverage.json'))['totals']['percent_covered_display'])") 
           echo "total=$TOTAL" >> $GITHUB_ENV
           echo "### Total coverage; ${TOTAL}%" 
+      #----------------------------------------------
+      #       Extract  
+      #----------------------------------------------
+      - name: "Make badge"
+        uses: schneegans/dynamic-badges-action@v1.4.0
+        with:
+          # GIST_TOKEN is a GitHub personal access token with scope "gist".
+          auth: ${{ secrets.GIST_TOKEN }}
+          gistID: 9252e96ccc8465bbcf31f9c1ed1fbcbc 
+          filename: covbadge.json
+          label: Coverage
+          message: ${{ env.total }}%
+          minColorRange: 50
+          maxColorRange: 90
+          valColorRange: ${{ env.total }}
