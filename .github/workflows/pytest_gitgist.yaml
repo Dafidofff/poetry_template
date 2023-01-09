@@ -60,14 +60,4 @@ jobs:
       - name: Get coverage summary percentage
         run: export TOTAL=$(python -c "import json;print(json.load(open('coverage.json'))['files']['template/__init__.py']['summary']['percent_covered'])")
              echo "total=$TOTAL" >> $GITHUB_ENV
-             echo "### Total coverage; ${TOTAL}%" >> $GITHUB_STEP_SUMMARY
-      #----------------------------------------------
-      #       commit and push coverage.svg
-      #----------------------------------------------
-      # - name: Commit new coverage.svg
-      #   uses: devops-infra/action-commit-push@master
-      #   with:
-      #     github_token: "${{ secrets.GITHUB_TOKEN }}"
-      #     commit_prefix: "[AUTO]"
-      #     commit_message: "Automatic commit coverage"
-      #     force: false
+             echo "### Total coverage; ${TOTAL}%"
