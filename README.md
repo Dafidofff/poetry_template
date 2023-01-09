@@ -1,6 +1,4 @@
 ![Alt text](./coverage.svg) 
-
-https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/dafidofff/9252e96ccc8465bbcf31f9c1ed1fbcbc/raw/covbadge.json
 <img src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/dafidofff/9252e96ccc8465bbcf31f9c1ed1fbcbc/raw/covbadge.json" />
 
 TODO:
