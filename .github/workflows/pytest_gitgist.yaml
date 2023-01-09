@@ -60,6 +60,7 @@ jobs:
       - name: Get coverage summary percentage
         run: export TOTAL=$(python -c "import json;print(json.load(open('coverage.json'))['files']['template/__init__.py']['summary']['percent_covered'])")
              echo "total=$TOTAL" >> $GITHUB_ENV
+             echo "### Total coverage: ${TOTAL}%" >> $GITHUB_STEP_SUMMARY
       #----------------------------------------------
       #       commit and push coverage.svg
       #----------------------------------------------
